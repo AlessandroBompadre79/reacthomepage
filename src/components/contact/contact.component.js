@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col  } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, FormFeedback } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 class Contact extends Component {
@@ -12,10 +12,79 @@ class Contact extends Component {
             email: '',
             agree: false,
             contactType: 'Tel',
-            message: ''
+            message: '',
+            touched: {
+                firstName: false,
+                lastName: false,
+                phoneNumber: false,
+                email: false
+            }
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+    }
+
+    handleBlur = (field) => (evt) => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true }
+        });
+    }
+
+    validateFirstName(firstName) {
+        if (this.state.touched.firstName && firstName.length < 3) {
+            return 'First Name should be >= 3 characters';
+        }
+        if (this.state.touched.firstName && firstName.length > 20) {
+            return 'First Name should be <= 20 characters';
+        }
+        return '';
+    }
+
+    validateLastName(lastName) {
+        if (this.state.touched.lastName && lastName.length < 3) {
+            return 'Last Name should be >= 3 characters';
+        }
+        else if (this.state.touched.lastName && lastName.length > 30) {
+            return 'Last Name should be <= 30 characters';
+        }
+        return '';
+    }
+
+    validatePhoneNumber(phoneNumber) {
+        // eslint-disable-next-line no-useless-escape
+        const reg = /^[+][0-9]{1,4}[\./0-9]{3,8}/;
+        if (this.state.touched.phoneNumber && !reg.test(phoneNumber)) {
+            return 'Tel. Number should mantain the form: +390000000000';
+        }
+        return '';
+    }
+
+    validateEmail(email) {
+        // eslint-disable-next-line no-useless-escape
+        const reg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/;
+        if (this.state.touched.email && !reg.test(email)) {
+            return 'Email format is not valid';
+        }
+        return '';
+    }
+
+    validate(firstName, lastName, phoneNumber, email) {
+        const errors = {
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
+            email: '',
+            agree: '',
+            contactType: '',
+            message: ''
+        };
+
+        errors.firstName = this.validateFirstName(firstName);
+        errors.lastName = this.validateLastName(lastName);
+        errors.phoneNumber = this.validatePhoneNumber(phoneNumber);
+        errors.email = this.validateEmail(email);
+        return errors;
     }
 
     handleInputChange(event) {
@@ -31,6 +100,7 @@ class Contact extends Component {
     }
 
     render() {
+        const errors = this.validate(this.state.firstName, this.state.lastName, this.state.phoneNumber, this.state.email)
         return(
             <div className="container">
                 <div className="row">
@@ -81,9 +151,18 @@ class Contact extends Component {
                                         First Name
                                     </Label>
                                     <Col md={9}>
-                                        <Input type="text" id="firstName" name="firstName" className="bg-secondary text-muted"
-                                            placeholder="Jhon" value={this.state.firstName}
+                                        <Input 
+                                            type="text" 
+                                            id="firstName" 
+                                            name="firstName" 
+                                            className="bg-secondary text-muted"
+                                            placeholder="Jhon" 
+                                            value={this.state.firstName}
+                                            valid={errors.firstName === ''}
+                                            invalid={errors.firstName !== ''}
+                                            onBlur={this.handleBlur('firstName')}
                                             onChange={this.handleInputChange}/>
+                                            <FormFeedback>{errors.firstName}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -91,9 +170,18 @@ class Contact extends Component {
                                         Last Name
                                     </Label>
                                     <Col md={9}>
-                                        <Input type="text" id="lastName" name="lastName" className="bg-secondary text-muted"
-                                            placeholder="Doe" value={this.state.lastName}
+                                        <Input
+                                            type="text" 
+                                            id="lastName" 
+                                            name="lastName" 
+                                            className="bg-secondary text-muted"
+                                            placeholder="Doe" 
+                                            value={this.state.lastName}
+                                            valid={errors.lastName === ''}
+                                            invalid={errors.lastName !== ''}
+                                            onBlur={this.handleBlur('lastName')}
                                             onChange={this.handleInputChange}/>
+                                            <FormFeedback>{errors.lastName}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -101,9 +189,18 @@ class Contact extends Component {
                                         Email
                                     </Label>
                                     <Col md={9}>
-                                        <Input type="email" id="email" name="email" className="bg-secondary text-muted"
-                                            placeholder="jhon.doe@email.me" value={this.state.email}
+                                        <Input
+                                            type="email" 
+                                            id="email" 
+                                            name="email" 
+                                            className="bg-secondary text-muted"
+                                            placeholder="jhon.doe@email.me" 
+                                            value={this.state.email}
+                                            valid={errors.email === ''}
+                                            invalid={errors.email !== ''}
+                                            onBlur={this.handleBlur('email')}
                                             onChange={this.handleInputChange}/>
+                                            <FormFeedback>{errors.email}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -111,23 +208,44 @@ class Contact extends Component {
                                         Phone number
                                     </Label>
                                     <Col md={9}>
-                                        <Input type="tel" id="phoneNumber" name="phoneNumber" className="bg-secondary text-muted"
-                                            placeholder="+39xxxxxxxxxx" value={this.state.phoneNumber}
+                                        <Input 
+                                            type="tel" 
+                                            id="phoneNumber" 
+                                            name="phoneNumber" 
+                                            className="bg-secondary text-muted"
+                                            placeholder="+39xxxxxxxxxx" 
+                                            value={this.state.phoneNumber}
+                                            valid={errors.phoneNumber === ''}
+                                            invalid={errors.phoneNumber !== ''}
+                                            onBlur={this.handleBlur('phoneNumber')}
                                             onChange={this.handleInputChange}/>
+                                            <FormFeedback>{errors.phoneNumber}</FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Col md={{size:5, offset:3}}>
                                         <FormGroup check>
                                             <Label check>
-                                                <Input className="bg-secondary text-muted" type="checkbox" name="agree" checked={this.state.agree}
-                                                onChange={this.handleInputChange}/> { ' ' }
+                                                <Input 
+                                                    className="bg-secondary text-muted" 
+                                                    type="checkbox" 
+                                                    name="agree" 
+                                                    checked={this.state.agree}
+                                                    valid={errors.agree === ''}
+                                                    invalid={errors.agree !== ''}
+                                                    onBlur={this.handleBlur('agree')}
+                                                    onChange={this.handleInputChange}/> { ' ' }
                                                 <strong>May we contact you</strong>
+                                                <FormFeedback>{errors.agree}</FormFeedback>
                                             </Label>
                                         </FormGroup>
                                     </Col>
                                     <Col md={{size:3, offset:1}}>
-                                        <Input className="bg-secondary text-muted" type="select" name="contactType" value={this.state.contactType}
+                                        <Input 
+                                        className="bg-secondary text-muted" 
+                                            type="select" 
+                                            name="contactType" 
+                                            value={this.state.contactType}
                                             onChange={this.handleInputChange}>
                                             <option>Tel.</option>
                                             <option>Email</option>
