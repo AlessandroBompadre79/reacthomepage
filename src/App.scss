@@ -1,6 +1,6 @@
-.App {
-  text-align: center;
-}
+@import './variables';
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import './bootswatch';
 
 .App-logo {
   height: 5vmin;
@@ -14,7 +14,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -50,23 +49,21 @@
 }
 
 .footer{
-  background-color: #D1C4E9;
   margin:0px auto;
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
   padding:70px 30px 70px 30px;
   margin:0px auto;
-  background: #9575CD ;
   color:floralwhite;
+  border-radius: 0;
 }
 
 address{
   font-size:80%;
   margin:0px;
-  color:#0f0f0f;
 }
 
-.navbar-dark {
-  background-color: #512DA8;
+.card-img {
+  border-radius: 10px;
 }

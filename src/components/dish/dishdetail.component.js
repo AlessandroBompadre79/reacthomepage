@@ -11,10 +11,10 @@ function renderDish(dish){
   );
 }
 
-function renderComments(commentlist){
+function renderComments(commentlist) {
   const comments = commentlist.map((comment) => {
       return (
-        <ul className="list-unstyled">
+        <ul key={comment.id} className="list-unstyled">
           <li>{comment.comment}</li>
           <li>--{comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</li>
         </ul>
@@ -23,15 +23,18 @@ function renderComments(commentlist){
   return (
   <div>
     <h4>Comments</h4>
-    <p>{comments}</p>
+    <div>
+      {comments}
+    </div>
   </div>
   );
 }
 
 const  DishDetail = (props) => {
   const dish = props.dish;
+  const comments = props.comments;
   if (!dish) {
-    return(<div></div>);
+    return(<></>);
   }
   else {
     return (
@@ -40,7 +43,7 @@ const  DishDetail = (props) => {
           {renderDish(dish)}
         </div>
         <div className="col-md-5">
-          {renderComments(props.dish.comments)}
+          {renderComments(comments)}
         </div>
       </div>
     );
