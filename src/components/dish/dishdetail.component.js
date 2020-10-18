@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardTitle } from 'reactstrap';
+import './dishdetail.scss';
 
 function renderDish(dish){
   return(

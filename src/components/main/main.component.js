@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Menu from '../menu/menu.component';
-import Header from '../header/header.component'
-import Footer from '../footer/footer.component'
-import Home from '../home/home.component';
-import Contact from '../contact/contact.component';
-import DishDetail from '../dish/dishdetail.component';
-import About from '../about/about.component';
+import Menu from '../menu';
+import Header from '../header'
+import Footer from '../footer'
+import Home from '../home';
+import Contact from '../contact';
+import DishDetail from '../dish';
+import About from '../about';
 import PAGES from '../../shared/constants/pages.js';
 import { COMMENTS } from '../../shared/constants/comments';
 import { PROMOTIONS } from '../../shared/constants/promotions';
 import { LEADERS } from '../../shared/constants/leaders';
-
+import './main.scss';
 
 class Main extends Component {
 
@@ -29,7 +29,7 @@ class Main extends Component {
   render() {
     const DishWithId = ({match}) => {
       return(
-          <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
+          <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]}
             comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
       );
     };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Jumbotron, Collapse, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import './header.scss';
 
 class Header extends Component {
 
@@ -18,8 +19,6 @@ class Header extends Component {
 
     handleLogin(event) {
         this.toggleModal();
-        console.log("Username: " + this.username.value + " Password: " + this.password.value
-        + " Remember: " + this.remember.checked);
         alert("Username: " + this.username.value + " Password: " + this.password.value
             + " Remember: " + this.remember.checked);
         event.preventDefault();
@@ -39,7 +38,7 @@ class Header extends Component {
 
     render() {
         return(
-            <div ref={this.wrapper}>
+            <div className="header-component" ref={this.wrapper}>
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />

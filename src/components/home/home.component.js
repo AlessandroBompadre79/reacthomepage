@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle} from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+import './home.scss';
 
 function RenderCard({item}) {
 
