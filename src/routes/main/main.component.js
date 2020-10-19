@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Menu from '../menu';
-import Header from '../header'
-import Footer from '../footer'
-import Home from '../home';
-import Contact from '../contact';
-import DishDetail from '../dish';
-import About from '../about';
+import Menu from '../../components/menu/menu.component';
+import Header from '../../components/header/header.component'
+import Footer from '../../components/footer/footer.component'
+import Home from '../../components/home/home.component';
+import Contact from '../../components/contact/contact.component';
+import DishDetail from '../../components/dish/dishdetail.component';
+import About from '../../components/about/about.component';
 import PAGES from '../../shared/constants/pages.js';
 import { COMMENTS } from '../../shared/constants/comments';
 import { PROMOTIONS } from '../../shared/constants/promotions';
