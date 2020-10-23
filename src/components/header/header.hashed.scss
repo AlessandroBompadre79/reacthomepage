@@ -1,3 +1,11 @@
+:global(.header) {
+    background-color: #2a82dc;
+}
+
+.header {
+    font-size: 14px;
+}
+
 .header-component {
     button.btn.btn-outline-secondary {
         color: #ACACAC;

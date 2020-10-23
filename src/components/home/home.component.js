@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+import cx from 'classnames';
+import styles from './home.hashed.scss';
 
 function RenderCard({item}) {
 

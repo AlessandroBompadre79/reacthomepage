@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Jumbotron, Collapse, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import './header.scss';
+import cx from 'classnames';
+import styles from './header.hashed.scss';
 
 class Header extends Component {
 
@@ -39,7 +40,7 @@ class Header extends Component {
     render() {
         return(
             <div className="header-component" ref={this.wrapper}>
-                <Navbar dark expand="md">
+                <Navbar dark expand="md" className={cx('header', styles.header)}>
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand className="mr-auto App-logo" href="/">
