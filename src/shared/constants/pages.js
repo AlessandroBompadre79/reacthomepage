@@ -1,4 +1,4 @@
-const PAGES =
+const DISHES =
     [
         {
         id: 0,
@@ -42,4 +42,4 @@ const PAGES =
         }
     ];
 
-export default PAGES;
+export default DISHES;

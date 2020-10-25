@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Row, Button, Label, Col } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import Validation from '../../shared/utils/validation.utils'
 import './contact.scss';
 class Contact extends Component {
     constructor(props) {
@@ -12,15 +13,14 @@ class Contact extends Component {
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
-        // event.preventDefault();
     }
 
     render() {
-        const required = (val) => val && val.length;
-        const maxLength = (len) => (val) => !(val) || (val.length <= len);
-        const minLength = (len) => (val) => val && (val.length >= len);
-        const isPhoneNumber = (val) => /^[+][0-9]{1,4}[\./0-9]{3,8}/.test(val);
-        const validEmail = (val) => /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/.test(val);
+        const required = Validation.required;
+        const maxLength = Validation.maxLength;
+        const minLength = Validation.minLength;
+        const isPhoneNumber = Validation.isPhoneNumber;
+        const validEmail = Validation.validEmail;
 
         return(
             <div className="container">
@@ -153,6 +153,13 @@ class Contact extends Component {
                                             validEmail: 'Invalid Email Address'
                                         }}
                                      />
+                                </Col>
+                            </Row>
+                            <Row className="form-group">
+                                <Col md={{size:10, offset: 2}}>
+                                    <Button type="submit" color="primary">
+                                    Send Feedback
+                                    </Button>
                                 </Col>
                             </Row>
                         </LocalForm>

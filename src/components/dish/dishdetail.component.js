@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardTitle } from 'reactstrap';
 import './dishdetail.scss';
+import Comment from '../comment'
+import Loading from '../loading/loading.component';
 
 function renderDish(dish){
   return(
@@ -12,8 +14,8 @@ function renderDish(dish){
   );
 }
 
-function renderComments(commentlist) {
-  const comments = commentlist.map((comment) => {
+function RenderComments({comments, addComment, dishID}) {
+  const commentsList = comments.map((comment) => {
       return (
         <ul key={comment.id} className="list-unstyled">
           <li>{comment.comment}</li>
@@ -25,7 +27,10 @@ function renderComments(commentlist) {
   <div>
     <h4>Comments</h4>
     <div>
-      {comments}
+      {commentsList}
+    </div>
+    <div>
+      <Comment dishID={dishID} addComment={addComment}></Comment>
     </div>
   </div>
   );
@@ -34,6 +39,23 @@ function renderComments(commentlist) {
 const  DishDetail = (props) => {
   const dish = props.dish;
   const comments = props.comments;
+  if (props.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+            <Loading />
+        </div>
+      </div>
+    );
+  } else if (props.errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+            <h4>{props.errMess}</h4>
+        </div>
+      </div>
+    );
+  }
   if (!dish) {
     return(<></>);
   }
@@ -44,7 +66,10 @@ const  DishDetail = (props) => {
           {renderDish(dish)}
         </div>
         <div className="col-md-5">
-          {renderComments(comments)}
+          <RenderComments comments={comments}
+            addComment={props.addComment}
+            dishID={props.dish.id}
+            />
         </div>
       </div>
     );
