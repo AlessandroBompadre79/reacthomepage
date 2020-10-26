@@ -1,0 +1,15 @@
+.navbar-fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    li {
+        margin: 10px;
+    }
+}

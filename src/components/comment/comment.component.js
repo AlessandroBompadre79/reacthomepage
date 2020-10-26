@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Button, Label, Col, Modal, ModalHeader, ModalBody, } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
-import './comment.hashed.scss';
+import './comment.module.scss';
 
 class Comment extends Component {
     constructor(props) {
@@ -21,7 +21,7 @@ class Comment extends Component {
 
     handleSubmit(values) {
         this.toggleModal();
-        this.props.addComment(this.props.dishID, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishID, values.rating, values.author, values.comment);
     }
 
     render() {

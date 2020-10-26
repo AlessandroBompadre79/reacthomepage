@@ -3,11 +3,15 @@ import * as ActionTypes from './action.types'
 
 export const Comments = ( state = COMMENTS, action ) => {
     switch(action.type) {
-        case ActionTypes.ADD_COMMENT: 
+        case ActionTypes.ADD_COMMENTS:
+            return {...state, errMess: null, comments: action.payload};
+
+        case ActionTypes.COMMENTS_FAILED:
+            return {...state, errMess: action.payload};
+
+        case ActionTypes.ADD_COMMENT:
             const comment = action.payload;
-            comment.id = state.length;
-            comment.date = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date());
-            return state.concat(comment);
+            return { ...state, comments: state.comments.concat(comment)};
         default:
             return state;
     }

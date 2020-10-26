@@ -4,8 +4,28 @@ import './footer.scss';
 
 function Footer(props) {
     return(
-    <div className="footer">
+    <div className="footer text-white bg-dark">
         <div className="container">
+            <div className="row justify-content-center">             
+                <div className="col-12">
+                    <ul className="list-unstyled flex-row">
+                        <li><Link to='/home'>Home</Link></li>
+                        <li><Link to='/aboutus'>About Us</Link></li>
+                        <li><Link to='/menu'>Menu</Link></li>
+                        <li><Link to='/contactus'>Contact Us</Link></li>
+                    </ul>
+                </div>
+            </div>
+            <div className="row">
+                <div class="col-12">
+                    <ul class="list-unstyled text-center flex-row">
+                        <li><i class="fa fa-envelope-o"></i> alessandro.bompadre@cloudfactory.eu</li>
+                        <li><i class="fa fa-phone-square"></i> +39 370 340 38 78</li>
+                        <li><i class="fa fa-home"></i> Pisa - Macerata - Firenze - Pistoia - Lucca - Roma - Bologna - Milano </li>
+                    </ul>
+                </div>
+            </div>
+        {/* 
             <div className="row justify-content-center">             
                 <div className="col-4 offset-1 col-sm-2">
                     <h5>Links</h5>
@@ -44,6 +64,7 @@ function Footer(props) {
                     <p>© Copyright 2018 Ristorante Con Fusion</p>
                 </div>
             </div>
+         */}
         </div>
     </div>
     )

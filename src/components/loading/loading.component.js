@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import styles from './loading.hashed.scss';
+import styles from './loading.module.scss';
 
 export const Loading = (props) => {
     return(

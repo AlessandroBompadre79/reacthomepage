@@ -1,0 +1,36 @@
+:global(.header) {
+    background-color: #f6f6f6;
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+:global(.io-logo) {
+    border-radius: 50%;
+    border: 3px solid #303030; 
+}
+
+.jumbotron {
+    margin-top: 50px !important;
+}
+
+.cardImg {
+    border-radius: 50% !important;
+}
+
+.header {
+    font-size: 14px;
+}
+
+.header-component {
+    button.btn.btn-outline-secondary {
+        color: #ACACAC;
+        border: 1px solid #ACACAC;
+    }
+}
+
+:global(.navbar-fixed-top) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}

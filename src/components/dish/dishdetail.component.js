@@ -3,18 +3,22 @@ import { Card, CardImg, CardText, CardTitle } from 'reactstrap';
 import './dishdetail.scss';
 import Comment from '../comment'
 import Loading from '../loading/loading.component';
+import { baseUrl } from '../../shared/endpoints/baseUrl';
+import { FadeTransform } from 'react-animation-components';
 
 function renderDish(dish){
   return(
-    <Card key={dish.id}>
-      <CardImg width="100%" src={dish.image} alt={dish.name} />
-      <CardTitle>{dish.name}</CardTitle>
-      <CardText>{dish.description}</CardText>
-    </Card>
+    <FadeTransform in transformProps={{ exitTransform: 'scale(0.5) translateY(-50%)'}}>
+      <Card key={dish.id}>
+        <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
+        <CardTitle>{dish.name}</CardTitle>
+        <CardText>{dish.description}</CardText>
+      </Card>
+    </FadeTransform>
   );
 }
 
-function RenderComments({comments, addComment, dishID}) {
+function RenderComments({comments, postComment, dishID}) {
   const commentsList = comments.map((comment) => {
       return (
         <ul key={comment.id} className="list-unstyled">
@@ -30,7 +34,7 @@ function RenderComments({comments, addComment, dishID}) {
       {commentsList}
     </div>
     <div>
-      <Comment dishID={dishID} addComment={addComment}></Comment>
+      <Comment dishID={dishID} postComment={postComment}></Comment>
     </div>
   </div>
   );
@@ -67,7 +71,7 @@ const  DishDetail = (props) => {
         </div>
         <div className="col-md-5">
           <RenderComments comments={comments}
-            addComment={props.addComment}
+            postComment={props.postComment}
             dishID={props.dish.id}
             />
         </div>

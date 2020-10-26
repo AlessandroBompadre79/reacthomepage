@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Jumbotron, Collapse, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Input, Label } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import cx from 'classnames';
-import styles from './header.hashed.scss';
+import styles from './header.module.scss';
 
 class Header extends Component {
 
@@ -40,11 +40,12 @@ class Header extends Component {
     render() {
         return(
             <div className="header-component" ref={this.wrapper}>
-                <Navbar dark expand="md" className={cx('header', styles.header)}>
+                <Navbar light expand="md" className={cx('header navbar-fixed-top bg-light', styles.header)}>
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto App-logo" href="/">
-                            <img src='../assets/images/logo192.png' height="30" width="30" alt='Ristorante Con Fusion' />
+                        <NavbarBrand className="mr-auto" href="/">
+                            {/* <img src='../assets/images/logo192.png' height="30" width="30" alt='Alessandro Bompadre Homepage' /> */}
+                            <img className="io-logo" src='/assets/images/io.jpg' height="30" alt='Alessandro Bompadre Homepage' />
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
@@ -71,12 +72,17 @@ class Header extends Component {
                         </Collapse>
                     </div>
                 </Navbar>
-                <Jumbotron>
+                <Jumbotron className={cx(styles.jumbotron)}>
                     <div className="container">
                         <div className="row row-header">
-                            <div className="col-12 col-sm-6">
-                                <h1>Ristorante con Fusion</h1>
-                                <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
+                            <div className="col-3">
+                                <img src="/assets/images/myself.png" alt="Alessandro Bompadre" className={cx('card-img',styles.cardImg)} />
+                            </div>
+                            <div className="col-9 text-justify">
+                                <h1>Alessandro Bompadre</h1>
+                                <p>
+                                    Senior software developer several years of experience, mostly in developing software in its whole life cycle including code programming, high level design, best practices implementation, maintenance, support, refactoring processes, reverse engineering. With a natural attitude in creative and practical problem solving, adaptability, learning new systems and technologies, I am always fast, innovative and accurate in every on-going project, resulting in high level of productivity in even tight deadlines. I enjoy working in team and on my own and take on new overcoming challenges with the aim to achieve new skills and goals.. In leisure I love to engage in association or sports activities, I collaborate with a web radio and practice wing tsun.
+                                </p>
                             </div>
                         </div>
                     </div>
